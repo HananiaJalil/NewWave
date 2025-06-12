@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Wave - Interactive Learning Solutions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFDFD;
+        }
+        html.dark body {
+            background-color: #111827;
+        }
+        .section-fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .section-fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dropdown-menu {
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+            transform: translateY(-10px);
+            opacity: 0;
+            pointer-events: none;
+        }
+        .dropdown-menu.open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="text-gray-800 dark:text-gray-200">
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center" id="home-logo-link">
+                 <h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">new wave</h1>
+            </a>
+            <div class="flex items-center space-x-4">
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <div class="relative dropdown">
+                        <button id="services-dropdown-btn" class="nav-link text-gray-600 dark:text-gray-300 hover:text-slate-800 dark:hover:text-white transition flex items-center" data-key="services">
+                            Services
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div id="services-dropdown-menu" class="dropdown-menu absolute top-full mt-2 w-64 bg-white dark:bg-gray-800 rounded-md shadow-lg py-2 border dark:border-gray-700">
+                            <a href="#services" class="nav-link dropdown-item block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-700" data-key="servicesDropdown1">Corporate Training Solutions</a>
+                            <a href="#next-era" class="nav-link dropdown-item block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-slate-100 dark:hover:bg-gray-700" data-key="servicesDropdown2">The Next Era of Learning</a>
+                        </div>
+                    </div>
+                    <a href="#about" class="nav-link text-gray-600 dark:text-gray-300 hover:text-slate-800 dark:hover:text-white transition" data-key="about">About</a>
+                    <a href="#contact" class="nav-link text-gray-600 dark:text-gray-300 hover:text-slate-800 dark:hover:text-white transition" data-key="contact">Contact</a>
+                </nav>
+                 <div class="flex items-center space-x-2">
+                     <button id="lang-toggle" class="px-3 py-1 rounded-full text-xs font-bold bg-white/20 dark:bg-white/10 text-slate-700 dark:text-slate-200 border border-white/30 dark:border-white/20 backdrop-blur-sm shadow-sm hover:bg-white/30 dark:hover:bg-white/20 transition">BM</button>
+                     <button id="theme-toggle" class="p-2 rounded-full text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none">
+                        <svg id="theme-icon-light" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                        <svg id="theme-icon-dark" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                    </button>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-gray-900">
+             <a href="#services" class="nav-link dropdown-item block py-3 px-6 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800" data-key="servicesDropdown1">Corporate Training Solutions</a>
+             <a href="#next-era" class="nav-link dropdown-item block py-3 px-6 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800" data-key="servicesDropdown2">The Next Era of Learning</a>
+             <a href="#about" class="nav-link block py-3 px-6 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800" data-key="about">About</a>
+             <a href="#contact" class="nav-link block py-3 px-6 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800" data-key="contact">Contact</a>
+        </div>
+    </header>
+
+    <div id="main-content">
+        <!-- Main content sections -->
+        <section id="home" class="relative min-h-screen flex items-center justify-center pt-20 bg-gray-900">
+            <div class="absolute inset-0"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2670&auto=format&fit=crop" alt="Abstract fluid background" class="w-full h-full object-cover opacity-20"></div>
+            <div class="relative z-10 text-center text-white px-6"><h1 class="text-4xl md:text-6xl font-bold leading-tight tracking-tight" data-key="heroTitle">Unlock Your Workforce's Potential Through Interactive Learning</h1><p class="mt-6 max-w-3xl mx-auto text-lg text-gray-200" data-key="heroSubtitle">We re-engineer your static training materials into engaging, interactive e-learning modules. Drive measurable performance, boost compliance, and empower your workforce for high-stakes industries.</p><a href="#services" class="nav-link dropdown-item mt-10 inline-block bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-10 rounded-lg shadow-lg transition-transform transform hover:scale-105" data-key="heroCta">Explore Our Solutions</a></div>
+        </section>
+        <section id="benefits" class="py-20 bg-white dark:bg-gray-900 section-fade-in"><div class="container mx-auto px-6"><div class="text-center"><h2 class="text-3xl font-bold text-gray-900 dark:text-white" data-key="whyTitle">Why New Wave?</h2><p class="mt-4 max-w-2xl mx-auto text-gray-600 dark:text-gray-400" data-key="whySubtitle">We deliver tangible business outcomes by transforming how your teams learn.</p></div><div class="mt-16 grid gap-8 md:grid-cols-3"><div class="text-center"><div class="w-16 h-16 mx-auto bg-slate-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-3xl">🛡️</div><h3 class="mt-6 text-xl font-bold dark:text-white" data-key="benefit1Title">Boost Compliance</h3><p class="mt-2 text-gray-600 dark:text-gray-400" data-key="benefit1Text">Ensure your workforce adheres to the latest industry standards and safety protocols with engaging, trackable training.</p></div><div class="text-center"><div class="w-16 h-16 mx-auto bg-slate-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-3xl">📈</div><h3 class="mt-6 text-xl font-bold dark:text-white" data-key="benefit2Title">Increase ROI</h3><p class="mt-2 text-gray-600 dark:text-gray-400" data-key="benefit2Text">Reduce training costs, minimize operational errors, and demonstrate the measurable impact of your L&D investment.</p></div><div class="text-center"><div class="w-16 h-16 mx-auto bg-slate-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-3xl">👷</div><h3 class="mt-6 text-xl font-bold dark:text-white" data-key="benefit3Title">Enhance Safety & Performance</h3><p class="mt-2 text-gray-600 dark:text-gray-400" data-key="benefit3Text">Empower employees with practical, scenario-based learning that improves decision-making and operational excellence.</p></div></div></div></section>
+        <section id="about" class="py-20 bg-slate-50 dark:bg-gray-900/50 section-fade-in"><div class="container mx-auto px-6"><div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden md:grid md:grid-cols-2 md:items-center"><div class="p-8 md:p-12"><h2 class="text-sm font-semibold uppercase text-slate-600 dark:text-slate-400" data-key="aboutUs">About Us</h2><p class="mt-4 text-3xl font-bold text-gray-900 dark:text-white" data-key="aboutTitle">We transform static corporate training into measurable, interactive e-learning.</p><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="aboutText">We eliminate disengagement, inefficiency, and unquantifiable ROI for high-stakes industries, leveraging proven expertise to create a proficient, high-performing workforce.</p><a href="#contact" class="nav-link mt-8 inline-block bg-slate-700 hover:bg-slate-800 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition" data-key="contactUs">CONTACT US</a></div><div class="h-64 md:h-full"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2684&auto=format&fit=crop" alt="Professional team collaborating" class="w-full h-full object-cover"></div></div></div></section>
+        <section id="clients" class="py-20 bg-white dark:bg-gray-900 section-fade-in"><div class="container mx-auto px-6 text-center"><h2 class="text-3xl font-bold text-gray-900 dark:text-white" data-key="trustedTitle">We are trusted by...</h2><div class="mt-12 grid grid-cols-2 md:grid-cols-5 gap-8 items-center"><div class="text-center text-gray-500 dark:text-gray-400 opacity-80 hover:opacity-100 transition"><p class="text-4xl">🏛️</p><p class="mt-2 font-semibold">INTAN</p></div><div class="text-center text-gray-500 dark:text-gray-400 opacity-80 hover:opacity-100 transition"><p class="text-4xl">👨‍👩‍👧‍👦</p><p class="mt-2 font-semibold">KEMAS</p></div><div class="text-center text-gray-500 dark:text-gray-400 opacity-80 hover:opacity-100 transition"><p class="text-4xl">🎓</p><p class="mt-2 font-semibold">MOE</p></div><div class="text-center text-gray-500 dark:text-gray-400 opacity-80 hover:opacity-100 transition"><p class="text-4xl">🛢️</p><p class="mt-2 font-semibold" data-key="clientOG">Oil & Gas Industry</p></div><div class="text-center text-gray-500 dark:text-gray-400 opacity-80 hover:opacity-100 transition"><p class="text-4xl">📚</p><p class="mt-2 font-semibold" data-key="clientPub">Publishers</p></div></div></div></section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-slate-50 dark:bg-gray-900/50 section-fade-in">
+            <div class="container mx-auto px-6">
+                <div class="grid gap-12 md:grid-cols-2">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 dark:text-white" data-key="contactTitle">Get in touch.</h2>
+                        <p class="mt-4 text-gray-600 dark:text-gray-400" data-key="contactText">Discover how New Wave can unlock your organization's full potential. Reach out today for a personalized consultation and let's build a more proficient, high-performing workforce together.</p>
+                    </div>
+                    <div>
+                        <form id="contact-form" class="space-y-6">
+                            <div class="grid gap-6 sm:grid-cols-2">
+                                <div>
+                                    <label for="FirstName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-key="formFirstName">First Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="FirstName" id="FirstName" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-slate-500 focus:ring-slate-500">
+                                </div>
+                                <div>
+                                    <label for="LastName" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-key="formLastName">Last Name <span class="text-red-500">*</span></label>
+                                    <input type="text" name="LastName" id="LastName" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-slate-500 focus:ring-slate-500">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="Email" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-key="formEmail">Email <span class="text-red-500">*</span></label>
+                                <input type="email" name="Email" id="Email" required class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-slate-500 focus:ring-slate-500">
+                            </div>
+                            <div>
+                                <label for="PositionOrganisation" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-key="formOrg">Position & Organisation</label>
+                                <input type="text" name="PositionOrganisation" id="PositionOrganisation" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-slate-500 focus:ring-slate-500">
+                            </div>
+                            <div>
+                                <label for="Message" class="block text-sm font-medium text-gray-700 dark:text-gray-300" data-key="formMessage">Message</label>
+                                <textarea name="Message" id="Message" rows="4" class="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 shadow-sm focus:border-slate-500 focus:ring-slate-500"></textarea>
+                            </div>
+                            <div>
+                                <button id="submit-btn" type="submit" class="w-full sm:w-auto bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-8 rounded-lg shadow-md transition" data-key="formSend">
+                                    SEND
+                                </button>
+                            </div>
+                        </form>
+                        <div id="form-status" class="mt-4 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Sub-pages, initially hidden -->
+    <div id="services-page" class="hidden"><section class="py-24 bg-white dark:bg-gray-900"><div class="container mx-auto px-6"><button id="back-to-home" class="font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8">&larr; <span data-key="backToHome">Back to Home</span></button><div class="text-center"><h1 class="text-4xl font-bold text-gray-900 dark:text-white" data-key="servicesTitle">Corporate Training Solutions</h1><p class="mt-4 max-w-2xl mx-auto text-gray-600 dark:text-gray-400" data-key="servicesDetailSubtitle">We provide end-to-end e-learning solutions, from initial strategy to final performance analysis.</p></div><div class="mt-16 space-y-12"><div class="grid md:grid-cols-2 gap-8 items-center"><img src="https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=2670&auto=format&fit=crop" alt="E-Learning" class="rounded-lg shadow-lg"><div><h3 class="text-2xl font-bold dark:text-white" data-key="service1Title">Strategic Content Analysis & Instructional Design</h3><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="service1DetailText">Our process begins with a deep dive into your existing training materials, operational procedures, and business objectives. We collaborate with your subject matter experts to identify key learning outcomes and performance indicators. Our instructional designers then architect a comprehensive learning blueprint, structuring your content into a logical, effective, and engaging curriculum tailored for your workforce and optimized for digital delivery.</p></div></div><div class="grid md:grid-cols-2 gap-8 items-center"><div class="order-last md:order-first"><h3 class="text-2xl font-bold dark:text-white" data-key="service2Title">Interactive Learning Content Development</h3><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="service2DetailText">This is where your static content comes alive. Using industry-leading authoring tools, we transform dry documents, presentations, and manuals into dynamic and immersive e-learning modules. This includes creating realistic simulations for safe practice, developing scenario-based challenges for critical thinking, and integrating gamification elements like quizzes and leaderboards to boost engagement and knowledge retention. All content is built to be fully responsive and accessible on any device.</p></div><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2670&auto=format&fit=crop" alt="Online Training" class="rounded-lg shadow-lg"></div><div class="grid md:grid-cols-2 gap-8 items-center"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2670&auto=format&fit=crop" alt="Workers collaborating" class="rounded-lg shadow-lg"><div><h3 class="text-2xl font-bold dark:text-white" data-key="service3Title">LMS Integration & Performance Consulting</h3><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="service3DetailText">Creating world-class content is only half the battle. We provide full technical support to ensure your new modules are seamlessly deployed and function flawlessly within your existing Learning Management System (LMS). We configure robust tracking and reporting, allowing you to monitor learner progress, completion rates, and assessment scores. Futhermore, we consult on how to leverage this data to identify knowledge gaps, measure training effectiveness, and demonstrate the tangible ROI of your L&D investments to stakeholders.</p></div></div></div></div></section></div>
+    <div id="next-era-page" class="hidden"><section class="py-24 bg-white dark:bg-gray-900"><div class="container mx-auto px-6"><button id="back-to-home-2" class="font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white mb-8">&larr; <span data-key="backToHome">Back to Home</span></button><div class="text-center"><h1 class="text-4xl font-bold text-gray-900 dark:text-white" data-key="nextEraTitle">The Next Era of Learning</h1><p class="mt-4 max-w-2xl mx-auto text-gray-600 dark:text-gray-400" data-key="nextEraSubtitle">We are pioneering the future of corporate training with immersive technologies.</p></div><div class="mt-16 space-y-12"><div class="grid md:grid-cols-2 gap-12 items-center"><div><img src="https://images.unsplash.com/photo-1634527773913-de1057a66379?q=80&w=2574&auto=format&fit=crop" alt="AR/VR Training" class="rounded-lg shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="image-fallback">🤖</div></div><div><h3 class="text-2xl font-bold dark:text-white" data-key="vrTitle">AR/VR Immersive Solutions</h3><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="vrText">Step into the future with Augmented and Virtual Reality training. We create ultra-realistic, simulated environments where your employees can practice complex, high-stakes procedures in a completely safe and controlled setting. Ideal for technical skills training, safety drills, and complex machinery operation, AR/VR learning drastically improves knowledge retention and real-world performance.</p></div></div><div class="grid md:grid-cols-2 gap-12 items-center"><div class="order-last md:order-first"><h3 class="text-2xl font-bold dark:text-white" data-key="droneTitle">Drone Videography & Surveying</h3><p class="mt-4 text-gray-600 dark:text-gray-400" data-key="droneText">Gain a new perspective on your operations. We utilize high-resolution drone videography for a variety of training and operational needs. From creating compelling training videos of large-scale sites to conducting detailed visual surveys for project planning and safety assessments, our drone services provide invaluable aerial data and insights that are impossible to capture from the ground.</p></div><div><img src="https://images.unsplash.com/photo-1574638826416-643c19b00512?q=80&w=2670&auto=format&fit=crop" alt="Drone in flight" class="rounded-lg shadow-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'"><div class="image-fallback">🚁</div></div></div></div></div></section></div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-50 dark:bg-gray-900/50 section-fade-in"><div class="container mx-auto px-6 py-8"><div class="sm:flex sm:justify-between sm:items-center"><h1 class="text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white">new wave</h1><div class="mt-4 sm:mt-0"><p class="font-semibold dark:text-white" data-key="contact">Contact</p><a href="mailto:elevate@newwaveop.com" class="text-gray-600 dark:text-gray-400 hover:text-slate-800 dark:hover:text-white">elevate@newwaveop.com</a></div></div><div class="mt-8 border-t border-gray-200 dark:border-gray-700 pt-4 text-center text-sm text-gray-500 dark:text-gray-400"><p data-key="footerRights">&copy; 2024 New Wave. All rights reserved.</p></div></div></footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const translations = {
+                en: {
+                    services: 'Services', nextEra: 'The Next Era', about: 'About', contact: 'Contact', backToHome: 'Back to Home',
+                    servicesDropdown1: 'Corporate Training Solutions', servicesDropdown2: 'The Next Era of Learning',
+                    heroTitle: "Unlock Your Workforce's Potential Through Interactive Learning", heroSubtitle: "We re-engineer your static training materials into engaging, interactive e-learning modules. Drive measurable performance, boost compliance, and empower your workforce for high-stakes industries.", heroCta: "Explore Our Solutions",
+                    whyTitle: "Why New Wave?", whySubtitle: "We deliver tangible business outcomes by transforming how your teams learn.",
+                    benefit1Title: "Boost Compliance", benefit1Text: "Ensure your workforce adheres to the latest industry standards and safety protocols with engaging, trackable training.",
+                    benefit2Title: "Increase ROI", benefit2Text: "Reduce training costs, minimize operational errors, and demonstrate the measurable impact of your L&D investment.",
+                    benefit3Title: "Enhance Safety & Performance", benefit3Text: "Empower employees with practical, scenario-based learning that improves decision-making and operational excellence.",
+                    aboutUs: "About Us", aboutTitle: "We transform static corporate training into measurable, interactive e-learning.", aboutText: "We eliminate disengagement, inefficiency, and unquantifiable ROI for high-stakes industries, leveraging proven expertise to create a proficient, high-performing workforce.",
+                    contactUs: "CONTACT US", trustedTitle: "We are trusted by...", clientOG: "Oil & Gas Industry", clientPub: "Publishers",
+                    servicesTitle: "Corporate Training Solutions", servicesDetailSubtitle: "We provide end-to-end e-learning solutions, from initial strategy to final performance analysis.",
+                    service1Title: "Strategic Content Analysis & Instructional Design", service1DetailText: "Our process begins with a deep dive into your existing training materials, operational procedures, and business objectives. We collaborate with your subject matter experts to identify key learning outcomes and performance indicators. Our instructional designers then architect a comprehensive learning blueprint, structuring your content into a logical, effective, and engaging curriculum tailored for your workforce and optimized for digital delivery.",
+                    service2Title: "Interactive Learning Content Development", service2DetailText: "This is where your static content comes alive. Using industry-leading authoring tools, we transform dry documents, presentations, and manuals into dynamic and immersive e-learning modules. This includes creating realistic simulations for safe practice, developing scenario-based challenges for critical thinking, and integrating gamification elements like quizzes and leaderboards to boost engagement and knowledge retention. All content is built to be fully responsive and accessible on any device.",
+                    service3Title: "LMS Integration & Performance Consulting", service3DetailText: "Creating world-class content is only half the battle. We provide full technical support to ensure your new modules are seamlessly deployed and function flawlessly within your existing Learning Management System (LMS). We configure robust tracking and reporting, allowing you to monitor learner progress, completion rates, and assessment scores. Futhermore, we consult on how to leverage this data to identify knowledge gaps, measure training effectiveness, and demonstrate the tangible ROI of your L&D investments to stakeholders.",
+                    nextEraTitle: "The Next Era of Learning", nextEraSubtitle: "We are pioneering the future of corporate training with immersive technologies.",
+                    vrTitle: "AR/VR Immersive Solutions", vrText: "Step into the future with Augmented and Virtual Reality training. We create ultra-realistic, simulated environments where your employees can practice complex, high-stakes procedures in a completely safe and controlled setting. Ideal for technical skills training, safety drills, and complex machinery operation, AR/VR learning drastically improves knowledge retention and real-world performance.",
+                    droneTitle: "Drone Videography & Surveying", droneText: "Gain a new perspective on your operations. We utilize high-resolution drone videography for a variety of training and operational needs. From creating compelling training videos of large-scale sites to conducting detailed visual surveys for project planning and safety assessments, our drone services provide invaluable aerial data and insights that are impossible to capture from the ground.",
+                    contactTitle: "Get in touch.", contactText: "Discover how New Wave can unlock your organization's full potential. Reach out today for a personalized consultation and let's build a more proficient, high-performing workforce together.",
+                    formFirstName: "First Name", formLastName: "Last Name", formEmail: "Email", formOrg: "Position & Organisation", formMessage: "Message", formSend: "SEND",
+                    formSuccess: "Thank you! Your message has been sent.", formError: "An error occurred. Please try again.",
+                    footerRights: "&copy; 2024 New Wave. All rights reserved."
+                },
+                bm: {
+                    services: 'Perkhidmatan', nextEra: 'Era Baharu', about: 'Tentang Kami', contact: 'Hubungi', backToHome: 'Kembali ke Laman Utama',
+                    servicesDropdown1: 'Solusi Latihan Korporat', servicesDropdown2: 'Era Pembelajaran Seterusnya',
+                    heroTitle: "Serlahkan Potensi Penuh Tenaga Kerja Anda Melalui Pembelajaran Interaktif", heroSubtitle: "Kami merekayasa semula bahan latihan statik anda kepada modul e-pembelajaran yang menarik dan interaktif. Pacu prestasi yang boleh diukur, tingkatkan pematuhan, dan perkasakan tenaga kerja anda untuk industri berisiko tinggi.", heroCta: "Terokai Solusi Kami",
+                    whyTitle: "Kenapa New Wave?", whySubtitle: "Kami memberikan hasil perniagaan yang ketara dengan mengubah cara pasukan anda belajar.",
+                    benefit1Title: "Tingkatkan Pematuhan", benefit1Text: "Pastikan tenaga kerja anda mematuhi piawaian industri dan protokol keselamatan terkini dengan latihan yang menarik dan boleh dijejaki.",
+                    benefit2Title: "Naikkan Pulangan Pelaburan (ROI)", benefit2Text: "Kurangkan kos latihan, minimumkan kesilapan operasi, dan tunjukkan impak pelaburan L&D anda yang boleh diukur.",
+                    benefit3Title: "Perkasa Keselamatan & Prestasi", benefit3Text: "Perkasakan pekerja dengan pembelajaran berasaskan senario praktikal yang meningkatkan pembuatan keputusan dan kecemerlangan operasi.",
+                    aboutUs: "Tentang Kami", aboutTitle: "Kami mengubah latihan korporat statik kepada e-pembelajaran yang boleh diukur dan interaktif.", aboutText: "Kami menghapuskan kurangnya penglibatan, ketidakcekapan, dan ROI yang tidak dapat diukur untuk industri berisiko tinggi, memanfaatkan kepakaran terbukti untuk mencipta tenaga kerja yang cekap dan berprestasi tinggi.",
+                    contactUs: "HUBUNGI KAMI", trustedTitle: "Kami dipercayai oleh...", clientOG: "Industri Minyak & Gas", clientPub: "Penerbit",
+                    servicesTitle: "Solusi Latihan Korporat", servicesDetailSubtitle: "Kami menyediakan solusi e-pembelajaran dari hujung ke hujung, dari strategi awal hingga analisis prestasi akhir.",
+                    service1Title: "Analisis Kandungan Strategik & Reka Bentuk Instruksional", service1DetailText: "Proses kami bermula dengan penelitian mendalam terhadap bahan latihan sedia ada, prosedur operasi, dan objektif perniagaan anda. Kami bekerjasama dengan pakar subjek anda untuk mengenal pasti hasil pembelajaran utama dan petunjuk prestasi. Pereka instruksional kami kemudiannya merangka pelan tindakan pembelajaran yang komprehensif, menyusun kandungan anda ke dalam kurikulum yang logik, berkesan, dan menarik yang disesuaikan untuk tenaga kerja anda dan dioptimumkan untuk penyampaian digital.",
+                    service2Title: "Pembangunan Kandungan Pembelajaran Interaktif", service2DetailText: "Di sinilah kandungan statik anda dihidupkan. Menggunakan alatan pengarangan terkemuka industri, kami mengubah dokumen, pembentangan, dan manual yang kering menjadi modul e-pembelajaran yang dinamik dan imersif. Ini termasuk mencipta simulasi realistik untuk latihan selamat, membangunkan cabaran berasaskan senario untuk pemikiran kritis, dan mengintegrasikan elemen gamifikasi seperti kuiz dan papan pendahulu untuk meningkatkan penglibatan dan pengekalan pengetahuan. Semua kandungan dibina untuk responsif sepenuhnya dan boleh diakses pada mana-mana peranti.",
+                    service3Title: "Integrasi LMS & Perundingan Prestasi", service3DetailText: "Mencipta kandungan bertaraf dunia hanyalah separuh perjuangan. Kami menyediakan sokongan teknikal penuh untuk memastikan modul baharu anda digunakan dengan lancar dan berfungsi tanpa cela dalam Sistem Pengurusan Pembelajaran (LMS) sedia ada anda. Kami mengkonfigurasi penjejakan dan pelaporan yang mantap, membolehkan anda memantau kemajuan pelajar, kadar penyelesaian, dan skor penilaian. Selanjutnya, kami memberi perundingan tentang cara memanfaatkan data ini untuk mengenal pasti jurang pengetahuan, mengukur keberkesanan latihan, dan menunjukkan ROI yang ketara daripada pelaburan L&D anda kepada pihak berkepentingan.",
+                    nextEraTitle: "Era Pembelajaran Seterusnya", nextEraSubtitle: "Kami merintis masa depan latihan korporat dengan teknologi imersif.",
+                    vrTitle: "Solusi Imersif AR/VR", vrText: "Melangkah ke masa depan dengan latihan Realiti Terimbuh dan Realiti Maya. Kami mencipta persekitaran simulasi ultra-realistik di mana pekerja anda boleh mempraktikkan prosedur yang kompleks dan berisiko tinggi dalam suasana yang selamat dan terkawal sepenuhnya. Sesuai untuk latihan kemahiran teknikal, latihan keselamatan, dan operasi jentera kompleks, pembelajaran AR/VR secara drastik meningkatkan pengekalan pengetahuan dan prestasi dunia sebenar.",
+                    droneTitle: "Videografi & Ukur Drone", droneText: "Dapatkan perspektif baharu mengenai operasi anda. Kami menggunakan videografi dron beresolusi tinggi untuk pelbagai keperluan latihan dan operasi. Daripada mencipta video latihan yang menarik di tapak berskala besar kepada menjalankan tinjauan visual terperinci untuk perancangan projek dan penilaian keselamatan, perkhidmatan dron kami menyediakan data dan wawasan udara yang tidak ternilai yang mustahil untuk ditangkap dari darat.",
+                    contactTitle: "Hubungi kami.", contactText: "Ketahui bagaimana New Wave boleh menyerlahkan potensi penuh organisasi anda. Hubungi kami hari ini untuk perundingan peribadi dan mari kita bina tenaga kerja yang lebih cekap dan berprestasi tinggi bersama-sama.",
+                    formFirstName: "Nama Pertama", formLastName: "Nama Keluarga", formEmail: "E-mel", formOrg: "Jawatan & Organisasi", formMessage: "Mesej", formSend: "HANTAR",
+                    formSuccess: "Terima kasih! Mesej anda telah dihantar.", formError: "Ralat telah berlaku. Sila cuba lagi.",
+                    footerRights: "&copy; 2024 New Wave. Hak cipta terpelihara."
+                }
+            };
+            
+            let currentLang = 'en';
+            
+            const langToggle = document.getElementById('lang-toggle');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const themeToggle = document.getElementById('theme-toggle');
+            const lightIcon = document.getElementById('theme-icon-light');
+            const darkIcon = document.getElementById('theme-icon-dark');
+            const mainContent = document.getElementById('main-content');
+            const servicesPage = document.getElementById('services-page');
+            const nextEraPage = document.getElementById('next-era-page');
+            const homeLogoLink = document.getElementById('home-logo-link');
+            const servicesDropdownBtn = document.getElementById('services-dropdown-btn');
+            const servicesDropdownMenu = document.getElementById('services-dropdown-menu');
+            const contactForm = document.getElementById('contact-form');
+            const formStatus = document.getElementById('form-status');
+
+            function showPage(pageToShow) {
+                mainContent.style.display = 'none';
+                servicesPage.style.display = 'none';
+                nextEraPage.style.display = 'none';
+                if(pageToShow) pageToShow.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+            
+            document.querySelectorAll('.nav-link.dropdown-item[href="#services"]').forEach(link => {
+                link.addEventListener('click', (e) => { e.preventDefault(); showPage(servicesPage); });
+            });
+            document.querySelectorAll('.nav-link.dropdown-item[href="#next-era"]').forEach(link => {
+                link.addEventListener('click', (e) => { e.preventDefault(); showPage(nextEraPage); });
+            });
+            
+            document.querySelectorAll('#back-to-home, #back-to-home-2').forEach(btn => {
+                 btn.addEventListener('click', (e) => { e.preventDefault(); showPage(mainContent); });
+            });
+            
+            homeLogoLink.addEventListener('click', (e) => { e.preventDefault(); showPage(mainContent); });
+
+            document.querySelectorAll('.nav-link:not(.dropdown-item):not([href^="#services"]):not([href^="#next-era"])').forEach(link => {
+                 link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    if(document.querySelector(targetId)) {
+                        e.preventDefault();
+                        showPage(mainContent);
+                        setTimeout(() => {
+                            document.querySelector(targetId).scrollIntoView({ behavior: 'smooth' });
+                        }, 50);
+                    }
+                 });
+            });
+            
+            servicesDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                servicesDropdownMenu.classList.toggle('open');
+            });
+
+            window.addEventListener('click', function(e) {
+                if (!servicesDropdownBtn.contains(e.target) && !servicesDropdownMenu.contains(e.target)) {
+                    servicesDropdownMenu.classList.remove('open');
+                }
+            });
+
+            function setLanguage(lang) {
+                currentLang = lang;
+                document.documentElement.lang = lang;
+                document.querySelectorAll('[data-key]').forEach(el => {
+                    const key = el.dataset.key;
+                    if (translations[lang][key]) {
+                        el.innerHTML = translations[lang][key];
+                    }
+                });
+                langToggle.textContent = lang === 'en' ? 'BM' : 'EN';
+                const firstNameInput = document.getElementById('FirstName');
+                if(firstNameInput) firstNameInput.labels[0].innerHTML = translations[lang].formFirstName + ' <span class="text-red-500">*</span>';
+                const lastNameInput = document.getElementById('LastName');
+                if(lastNameInput) lastNameInput.labels[0].innerHTML = translations[lang].formLastName + ' <span class="text-red-500">*</span>';
+                const emailInput = document.getElementById('Email');
+                if(emailInput) emailInput.labels[0].innerHTML = translations[lang].formEmail + ' <span class="text-red-500">*</span>';
+            }
+
+            langToggle.addEventListener('click', () => {
+                const newLang = currentLang === 'en' ? 'bm' : 'en';
+                setLanguage(newLang);
+            });
+
+            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            const applyTheme = (theme) => {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    lightIcon.classList.remove('hidden'); darkIcon.classList.add('hidden');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    lightIcon.classList.add('hidden'); darkIcon.classList.remove('hidden');
+                }
+            };
+
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.documentElement.classList.toggle('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                applyTheme(isDark ? 'dark' : 'light');
+            });
+
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            applyTheme(savedTheme);
+
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE'; // IMPORTANT: PASTE YOUR SCRIPT URL HERE
+                const submitBtn = document.getElementById('submit-btn');
+
+                if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
+                    alert('Form submission is not configured. Please add a valid Google Apps Script URL.');
+                    return;
+                }
+                
+                formStatus.className = 'text-slate-600 dark:text-slate-400';
+                formStatus.textContent = 'Sending...';
+                submitBtn.disabled = true;
+
+                fetch(SCRIPT_URL, { method: 'POST', body: new FormData(contactForm)})
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.result === 'success') {
+                            formStatus.className = 'text-green-600 dark:text-green-500';
+                            formStatus.textContent = translations[currentLang].formSuccess;
+                            contactForm.reset();
+                        } else {
+                            throw new Error(data.error || 'Unknown error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error!', error.message);
+                        formStatus.className = 'text-red-600 dark:text-red-500';
+                        formStatus.textContent = translations[currentLang].formError;
+                    })
+                    .finally(() => {
+                        submitBtn.disabled = false;
+                    });
+            });
+
+            const sections = document.querySelectorAll('.section-fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            sections.forEach(section => { observer.observe(section); });
+
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('py-3', window.scrollY > 50);
+                header.classList.toggle('py-4', window.scrollY <= 50);
+            });
+
+            setLanguage('en'); 
+        });
+    </script>
+</body>
+</html>
